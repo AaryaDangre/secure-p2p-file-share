@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SecureShare</title>
+
+    <link rel="stylesheet" href="style.css?v=3">
+
+    <!-- VANTA -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+</head>
+
+<body>
+
+    <div id="vanta-bg"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <h2>SecureShare</h2>
+        <div class="nav-links">
+            <a href="#" class="nav-btn active" data-target="sec-home">Home</a>
+            <a href="#" class="nav-btn" data-target="sec-how">How it Works</a>
+            <a href="#" class="nav-btn" data-target="sec-transfer">Transfer & Chat</a>
+        </div>
+    </nav>
+
+    <!-- CONTENT CONTAINER -->
+    <div class="content-container">
+        <!-- HOME SEC -->
+        <section class="page-section active-sec" id="sec-home">
+            <div class="hero">
+                <h1>Secure<span>Share</span></h1>
+                <p>Send files securely between peers using encryption</p>
+                <button onclick="switchTab('sec-transfer')">Try Now</button>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS SEC -->
+        <section class="page-section" id="sec-how">
+            <div class="how">
+                <h2>How It Works</h2>
+                <div class="cards">
+                    <div class="card">
+                        <h3>📁 Select File</h3>
+                        <p class="card-desc">Choose file from your system</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔐 Encryption</h3>
+                        <p class="card-desc">File is encrypted using AES</p>
+                    </div>
+                    <div class="card">
+                        <h3>🌐 Transfer</h3>
+                        <p class="card-desc">Sent over secure channel</p>
+                    </div>
+                    <div class="card">
+                        <h3>🔌 Socket</h3>
+                        <p class="card-desc">Direct peer-to-peer connection</p>
+                    </div>
+                    <div class="card">
+                        <h3>📦 Delivery</h3>
+                        <p class="card-desc">File received by peer</p>
+                    </div>
+                    <div class="card">
+                        <h3>📊 Status</h3>
+                        <p class="card-desc">Track transfer progress</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANSFER & CHAT SEC -->
+        <section class="page-section" id="sec-transfer">
+            <div class="transfer-layout">
+                <div class="panel node-config-panel">
+                    <h2>Target Node Details</h2>
+                    <div class="ip-port-group">
+                        <input type="text" id="ip" placeholder="Target IP Address (e.g., 192.168.1.5)">
+                        <input type="number" id="port" value="5000" placeholder="Port">
+                    </div>
+                </div>
+
+                <div class="transfer-chat-layout">
+                    <div class="panel transfer-panel">
+                        <h2>Send File</h2>
+
+                        <label class="input-label">Select File</label>
+                        <input type="file" id="fileInput" onchange="previewFile()">
+                        <div id="preview"></div>
+
+                        <button onclick="sendFile()">Send File</button>
+
+                        <div class="progress-container">
+                            <div id="progressBar"></div>
+                        </div>
+                        <p id="status"></p>
+                    </div>
+
+                    <div class="panel chat-panel">
+                        <h2>Secure Chat</h2>
+
+                        <div id="chatBox"></div>
+                        <div class="chat-input-group">
+                            <input type="text" id="messageInput" placeholder="Type a secure message..."
+                                onkeydown="if(event.key === 'Enter') sendMessage()">
+                            <button onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel history-panel">
+                    <h2>Transfer History</h2>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>File</th>
+                                    <th>Size</th>
+                                    <th>IP</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="logs"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 SecureShare. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize active tab from hash or default to home
+        document.addEventListener("DOMContentLoaded", () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                switchTab(hash);
+            }
+        });
+    </script>
+</body>
+
+</html>
